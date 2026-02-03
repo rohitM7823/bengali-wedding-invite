@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Animations & Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-bengali text-ivory antialiased overflow-x-hidden;
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: 0.02em;
+  }
+}
+
+@layer components {
+  /* Gold Shimmer Text Effect */
+  .gold-shimmer-text {
+    background: linear-gradient(to right, #C5A059 20%, #FFF8E7 40%, #FFF8E7 60%, #C5A059 80%);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Ornamental Divider */
+  .ornamental-divider {
+    @apply flex items-center justify-center;
+  }
+  
+  .ornamental-divider::before,
+  .ornamental-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #D4AF37;
+    margin: auto 0;
+    opacity: 0.8;
+  }
+  
+  .ornamental-divider::before {
+    margin-right: 15px;
+  }
+  
+  .ornamental-divider::after {
+    margin-left: 15px;
+  }
+
+  /* Gold Border Shine */
+  .gold-border-shine {
+    border: 2px solid #D4AF37;
+    border-radius: 50% / 40%;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    overflow: hidden;
+  }
+
+  /* Card Inner Content */
+  .content-inner {
+    @apply bg-maroon rounded-lg;
+  }
+
+  /* Text Shadow */
+  .text-shadow-gold {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Sparkle Element */
+  .sparkle {
+    position: fixed;
+    top: -10px;
+    color: #E5C585;
+    font-size: 10px;
+    z-index: 0;
+    user-select: none;
+    pointer-events: none;
+    animation: fall 10s linear infinite;
+  }
+
+  /* Falling Petal */
+  .petal {
+    position: absolute;
+    background-color: #ffcdd2;
+    border-radius: 150% 0 150% 0;
+    animation: fall 12s linear infinite;
+    opacity: 0.7;
+    z-index: 50;
+  }
+  
+  .petal:nth-child(odd) {
+    background-color: #ef9a9a;
+  }
+
+  /* Language Toggle Button */
+  .language-toggle {
+    @apply absolute top-4 right-4 z-50;
+    @apply bg-black/30 text-cream border border-cream/30;
+    @apply rounded-full w-8 h-8 text-xs font-bold;
+    @apply flex items-center justify-center;
+    @apply backdrop-blur-sm cursor-pointer;
+    @apply transition-all duration-300;
+    @apply hover:bg-black/50 hover:-translate-y-0.5 hover:shadow-lg;
+  }
+
+  /* Kolka Border Pattern */
+  .kolka-pattern {
+    position: fixed;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    background-repeat: repeat-y;
+    background-size: contain;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .kolka-left {
+    left: 0;
+  }
+
+  .kolka-right {
+    right: 0;
+    transform: scaleX(-1);
+  }
+}
+
+@layer utilities {
+  /* Balloon Trail Effect */
+  .balloon-trail {
+    filter: blur(0.5px);
+  }
+}
+
+/* Title Animation Keyframes */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes titleEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 1s ease-out;
+}
+
+.animate-title-entrance {
+  animation: titleEntrance 0.8s ease-out;
+}
+
+/* Slide from left to right animation */
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-right {
+  animation: slideRight 0.8s ease-out;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+  h1 { font-size: 2.5rem !important; }
+  h2 { font-size: 1.5rem !important; }
+  h3 { font-size: 1.125rem !important; }
+  
+  .ornamental-divider span {
+    font-size: 1.5rem !important;
+  }
+  
+  button {
+    min-height: 44px;
+  }
+  
+  .kolka-pattern {
+    width: 50px;
+    opacity: 0.4;
+  }
+}
+
+@media (hover: none) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
