@@ -19,15 +19,25 @@ const togglePlay = () => {
 onMounted(() => {
   if (audioRef.value) {
     // Attempt to autoplay
-    audioRef.value.play()
-      .then(() => {
+    const playAudio = async () => {
+      if (!audioRef.value) return
+      
+      try {
+        await audioRef.value.play()
         isPlaying.value = true
-      })
-      .catch((error) => {
+        // Remove listener if it exists
+        document.removeEventListener('click', playAudio)
+        document.removeEventListener('touchstart', playAudio)
+      } catch (error) {
         console.log('Autoplay prevented:', error)
-        // Autoplay was prevented, user will need to click play
         isPlaying.value = false
-      })
+        // Add listeners for user interaction to retry play
+        document.addEventListener('click', playAudio, { once: true })
+        document.addEventListener('touchstart', playAudio, { once: true })
+      }
+    }
+
+    playAudio()
   }
 })
 </script>
