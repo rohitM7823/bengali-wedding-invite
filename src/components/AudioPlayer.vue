@@ -40,6 +40,16 @@ onMounted(() => {
     playAudio()
   }
 })
+
+// Expose play method for parent control
+const play = () => {
+  if (audioRef.value) {
+    audioRef.value.play().catch(e => console.log('Manual play failed:', e))
+    isPlaying.value = true
+  }
+}
+
+defineExpose({ play })
 </script>
 
 <template>

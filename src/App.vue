@@ -6,8 +6,17 @@ import FooterSection from './components/FooterSection.vue'
 import SparklesBackground from './components/SparklesBackground.vue'
 import KolkaBorder from './components/KolkaBorder.vue'
 import AudioPlayer from './components/AudioPlayer.vue'
+import WelcomeOverlay from './components/WelcomeOverlay.vue'
+import { ref } from 'vue'
 
 const { t } = useLanguage()
+const audioPlayerRef = ref<{ play: () => void } | null>(null)
+
+const handleWelcomeEnter = () => {
+  if (audioPlayerRef.value) {
+    audioPlayerRef.value.play()
+  }
+}
 
 // Event data
 const events = [
@@ -32,8 +41,11 @@ const events = [
 
 <template>
   <div class="bg-sindoor font-bengali text-ivory overflow-x-hidden antialiased relative min-h-screen">
+    <!-- Welcome Overlay -->
+    <WelcomeOverlay @enter="handleWelcomeEnter" />
+
     <!-- Audio Player -->
-    <AudioPlayer />
+    <AudioPlayer ref="audioPlayerRef" />
     
     <!-- Damask Pattern Overlay -->
     <div 
