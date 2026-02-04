@@ -23,7 +23,7 @@ const events = [
   {
     titleBn: 'বিবাহ',
     titleEn: 'Marriage',
-    dateBn: 'রাত্রি, ৪, ২০২৬, ৭:০০ মি',
+    dateBn: 'রাত্রি, ৪ঠা মার্চ, ২০২৬, ৭:০০ মি',
     dateEn: 'Night, 4th March, 2026, 7:00 PM',
     imageSrc: '/images/marriage.png',
     venueUrl: 'https://maps.app.goo.gl/1d8eZao7QQS6CeNQA?g_st=aw',
@@ -31,7 +31,7 @@ const events = [
   {
     titleBn: 'রিসেপশন',
     titleEn: 'Reception',
-    dateBn: 'রাত্রি, ৬, ২০২৬, ৮:০০ মি',
+    dateBn: 'রাত্রি, ৬ই মার্চ, ২০২৬, ৮:০০ মি',
     dateEn: 'Night, 6th March, 2026, 8:00 PM',
     imageSrc: '/images/kissing.png',
     venueUrl: 'https://maps.app.goo.gl/MjaFs3rN5aKvkibB6',
