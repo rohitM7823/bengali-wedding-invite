@@ -8,11 +8,13 @@ const { t, toggleLanguage } = useLanguage()
 // Parallax effect for palace image
 const palaceRef = ref<HTMLImageElement | null>(null)
 const parallaxOffset = ref(0)
+const showScrollIndicator = ref(true)
 
 const handleScroll = () => {
   const scrolled = window.scrollY
   const parallaxSpeed = 0.4
   parallaxOffset.value = scrolled * parallaxSpeed
+  showScrollIndicator.value = scrolled < 100
 }
 
 onMounted(() => {
@@ -123,6 +125,30 @@ onUnmounted(() => {
           <path d="M50,10 C25,10 5,30 5,55 C5,70 15,82 30,90 L30,95 L70,95 L70,90 C85,82 95,70 95,55 C95,30 75,10 50,10 Z" fill="#E5C585"/>
         </svg>
       </div>
+
+      <!-- Scroll Down Indicator -->
+      <Transition
+        enter-active-class="transition-opacity duration-500"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-opacity duration-500"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div 
+          v-if="showScrollIndicator"
+          class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1"
+        >
+          <span class="text-gold-champagne/70 text-[10px] uppercase tracking-[0.25em] font-serif">
+            {{ t('নিচে স্ক্রল করুন', 'Scroll Down') }}
+          </span>
+          <div class="scroll-bounce-arrow">
+            <svg class="w-5 h-5 text-gold-royal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </Transition>
     </div>
 
     <!-- Content Section -->
@@ -190,3 +216,21 @@ onUnmounted(() => {
     </div>
   </header>
 </template>
+
+<style scoped>
+.scroll-bounce-arrow {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(8px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+}
+</style>

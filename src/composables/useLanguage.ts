@@ -4,7 +4,7 @@ export type Language = 'bn' | 'en'
 
 // Persistent language state
 const currentLanguage = ref<Language>(
-  (typeof localStorage !== 'undefined' && localStorage.getItem('preferredLanguage') as Language) || 'bn'
+  (typeof localStorage !== 'undefined' && localStorage.getItem('preferredLanguage') as Language) || 'en'
 )
 
 // Translation helper

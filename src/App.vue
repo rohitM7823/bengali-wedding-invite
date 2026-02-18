@@ -7,7 +7,7 @@ import SparklesBackground from './components/SparklesBackground.vue'
 import KolkaBorder from './components/KolkaBorder.vue'
 import AudioPlayer from './components/AudioPlayer.vue'
 import WelcomeOverlay from './components/WelcomeOverlay.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const { t } = useLanguage()
 const audioPlayerRef = ref<{ play: () => void } | null>(null)
@@ -19,8 +19,9 @@ const handleWelcomeEnter = () => {
 }
 
 // Event data
-const events = [
+const allEvents = [
   {
+    id: 'marriage',
     titleBn: 'বিবাহ',
     titleEn: 'Marriage',
     dateBn: 'রাত্রি, ৪ঠা মার্চ, ২০২৬, ৭:০০ মি',
@@ -29,6 +30,7 @@ const events = [
     venueUrl: 'https://maps.app.goo.gl/1d8eZao7QQS6CeNQA?g_st=aw',
   },
   {
+    id: 'reception',
     titleBn: 'রিসেপশন',
     titleEn: 'Reception',
     dateBn: 'রাত্রি, ৬ই মার্চ, ২০২৬, ৮:০০ মি',
@@ -37,6 +39,19 @@ const events = [
     venueUrl: 'https://maps.app.goo.gl/MjaFs3rN5aKvkibB6',
   },
 ]
+
+// Filter events based on URL path
+const currentPath = window.location.pathname.replace(/\/$/, '').toLowerCase()
+
+const events = computed(() => {
+  if (currentPath === '/reception') {
+    return allEvents.filter(e => e.id === 'reception')
+  }
+  if (currentPath === '/marriage') {
+    return allEvents.filter(e => e.id === 'marriage')
+  }
+  return allEvents
+})
 </script>
 
 <template>
